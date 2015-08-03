@@ -3,6 +3,7 @@ package com.TTTServer.Config;
 import com.TTTServer.Responders.TTTGameConfigResponder;
 import com.TTTServer.Responders.TTTHomePageResponder;
 import com.TTTServer.Responders.TTTNewStandardGameResponder;
+import com.TTTServer.Responders.TTTUpdateBoardResponder;
 import com.httpServer.RequestAdapter.Request;
 import com.httpServer.Router.RouteRegistrar;
 import org.junit.Before;
@@ -47,4 +48,11 @@ public class TTTRouteConfigTest {
         assertEquals(TTTNewStandardGameResponder.class, RouteRegistrar.getRoute(tttNewStandardGameRequest).getClass());
     }
 
+    @Test
+    public void addsTTTUpdateBoardRoute() {
+        Request tttUpdateBoardRequest = new Request();
+        tttUpdateBoardRequest.setMethod("POST");
+        tttUpdateBoardRequest.setUri("/tic_tac_toe/game");
+        assertEquals(TTTUpdateBoardResponder.class, RouteRegistrar.getRoute(tttUpdateBoardRequest).getClass());
+    }
 }

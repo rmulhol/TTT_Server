@@ -1,0 +1,130 @@
+<style>
+    h1, h2, h4 {
+        font-family: Lucida Sans Unicode;
+        border-radius: 25px;
+        text-align: center;
+    }
+    button {
+        background-color:#5fcc29;
+        border-radius:4px;
+        font-family:Lucida Sans Unicode;
+    }
+    table {
+        width: 100%;
+        height: 100%;
+        border-collapse: collapse;
+    }
+    .container {
+        width: 50%;
+        height: 70%;
+        margin: auto;
+        position: relative;
+    }
+    .header {
+        text-align: center;
+        padding-top: 2%;
+    }
+    .game-over {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 25px;
+        opacity: 0.9;
+        background-color: #eee;
+    }
+    .contents {
+        padding: 15%;
+    }
+    .square {
+        height: 100px;
+        width: 100px;
+    }
+    .unchecked:hover {
+        background: #eee;
+    }
+    .cc {
+        border-left:1px solid #000;
+        border-right:1px solid #000;
+    }
+    .cr {
+        border-top:1px solid #000;
+        border-bottom:1px solid #000;
+    }
+    .player-1 {
+        color: red;
+        background-color: #F8F8F8;
+        box-shadow: 10px 10px 5px #888888;
+        margin-left: 35%;
+        margin-right: 35%;
+
+    }
+    .player-2 {
+        color: blue;
+        background-color: #F8F8F8;
+        box-shadow: 10px 10px 5px #888888;
+        margin-left: 35%;
+        margin-right: 35%;
+    }
+</style>
+<div class="header">
+    <h1>Tic Tac Toe!</h1>
+    <h4>Click An Open Space To Make A Move</h4>
+</div>
+<div class="container">
+<table>
+<tbody>
+<tr>
+<td class="square" id="square-1">
+<h1 class="player-1">X</h1>
+</td>
+<td class="square cc" id="square-2">
+<h1 class="player-2">O</h1>
+</td>
+<td class="square" id="square-3">
+<h1 class="player-1">X</h1>
+</td>
+</tr>
+<tr>
+<td class="square cr unchecked" id="square-4">
+<form id="form-4" method="post">
+<input type="hidden" name="player-1-id" value="human">
+<input type="hidden" name="player-2-id" value="ai">
+<input type="hidden" name="player-1-mv" value="X">
+<input type="hidden" name="player-2-mv" value="O">
+<input type="hidden" name="board" value="X,O,X, ,O,O,O,X,X">
+<input type="hidden" name="move" value="4">
+</form>
+</td>
+<td class="square cc cr" id="square-5">
+<h1 class="player-2">O</h1>
+</td>
+<td class="square cr" id="square-6">
+<h1 class="player-2">O</h1>
+</td>
+</tr>
+<tr>
+<td class="square" id="square-7">
+<h1 class="player-2">O</h1>
+</td>
+<td class="square cc" id="square-8">
+<h1 class="player-1">X</h1>
+</td>
+<td class="square" id="square-9">
+<h1 class="player-1">X</h1>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<script type="text/javascript">
+for (var i = 1; i < 10; i++) {
+    (function () {
+        var thisForm = 'form-' + i;
+
+        document.getElementById('square-' + i).addEventListener("click", function() {
+           document.getElementById(thisForm).submit();
+        });
+    }())
+}
+</script>

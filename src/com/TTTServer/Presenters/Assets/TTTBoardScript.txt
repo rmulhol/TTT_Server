@@ -1,0 +1,11 @@
+<script type="text/javascript">
+for (var i = 1; i < 10; i++) {
+    (function () {
+        var thisForm = 'form-' + i;
+
+        document.getElementById('square-' + i).addEventListener("click", function() {
+           document.getElementById(thisForm).submit();
+        });
+    }())
+}
+</script>

@@ -21,5 +21,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="tic-tac-toe-0.1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="tic-tac-toe-0.1.0-SNAPSHOT-standalone" level="project" />
   </component>
 </module>

@@ -1,0 +1,69 @@
+<style>
+    h1, h2, h4 {
+        font-family: Lucida Sans Unicode;
+        border-radius: 25px;
+        text-align: center;
+    }
+    button {
+        background-color:#5fcc29;
+        border-radius:4px;
+        font-family:Lucida Sans Unicode;
+    }
+    table {
+        width: 100%;
+        height: 100%;
+        border-collapse: collapse;
+    }
+    .container {
+        width: 50%;
+        height: 70%;
+        margin: auto;
+        position: relative;
+    }
+    .header {
+        text-align: center;
+        padding-top: 2%;
+    }
+    .game-over {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 25px;
+        opacity: 0.9;
+        background-color: #eee;
+    }
+    .contents {
+        padding: 15%;
+    }
+    .square {
+        height: 100px;
+        width: 100px;
+    }
+    .unchecked:hover {
+        background: #eee;
+    }
+    .cc {
+        border-left:1px solid #000;
+        border-right:1px solid #000;
+    }
+    .cr {
+        border-top:1px solid #000;
+        border-bottom:1px solid #000;
+    }
+    .player-1 {
+        color: red;
+        background-color: #F8F8F8;
+        box-shadow: 10px 10px 5px #888888;
+        margin-left: 35%;
+        margin-right: 35%;
+
+    }
+    .player-2 {
+        color: blue;
+        background-color: #F8F8F8;
+        box-shadow: 10px 10px 5px #888888;
+        margin-left: 35%;
+        margin-right: 35%;
+    }
+</style>
