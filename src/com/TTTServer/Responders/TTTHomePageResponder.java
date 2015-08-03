@@ -12,7 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class TTTHomePageResponder implements Handler {
-    Response tttHomePageResponse;
+    private Response tttHomePageResponse;
 
     @Override
     public Response respondToRequest(Request request) {

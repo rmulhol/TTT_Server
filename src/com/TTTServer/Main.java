@@ -7,7 +7,7 @@ import com.httpServer.Runner.ServerRunner;
 
 import java.io.IOException;
 
-public class Main {
+class Main {
 
     public static void main(String[] args) throws IOException {
         LoggerConfig.configureLogs();
