@@ -1,0 +1,44 @@
+<style>
+    h1 {
+        text-align: center;
+        font-family: Lucida Sans Unicode;
+        border-radius: 25px;
+        padding-top: 2%;
+    }
+    h4 {
+        text-align: center;
+        font-family: Lucida Sans Unicode;
+    }
+    p {
+        font-family: Lucida Sans Unicode;
+    }
+    .options {
+        padding-top: 2%;
+        width: 40%;
+        margin: auto;
+    }
+    .standard-game {
+        width: 20%;
+        float: left;
+    }
+    .config-game {
+        width: 20%;
+        float: right;
+    }
+</style>
+
+<h1>Tic Tac Toe!</h1>
+<h4>Choose Your Game</h4>
+
+<div class="container">
+    <div class="options">
+        <div class="standard-game">
+            <a href="/tic_tac_toe/game"><button type="submit">Play Standard Game</button></a>
+            <p>It's X vs O in this standard Human vs AI game. Prepare to never win!</p>
+        </div>
+        <div class="config-game">
+            <a href="/tic_tac_toe/config"><button type="submit">Configure Custom Game</button></a>
+            <p>Customize player identities and move signatures to give yourself a shot.</p>
+        </div>
+    </div>
+</div>
