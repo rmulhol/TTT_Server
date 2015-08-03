@@ -1,12 +1,14 @@
 package com.TTTServer.Config;
 
+import com.TTTServer.Responders.TTTGameConfigResponder;
 import com.TTTServer.Responders.TTTHomePageResponder;
 import com.httpServer.Router.RouteRegistrar;
 
-class TTTRouteConfig {
+public class TTTRouteConfig {
 
     public static void setupRoutes() {
         RouteRegistrar.addRoute("/tic_tac_toe", "GET", new TTTHomePageResponder());
+        RouteRegistrar.addRoute("/tic_tac_toe/config", "GET", new TTTGameConfigResponder());
     }
 
 }

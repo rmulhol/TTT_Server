@@ -1,0 +1,90 @@
+<style>
+    h1 {
+        text-align: center;
+        font-family: Lucida Sans Unicode;
+        border-radius: 25px;
+        padding-top: 2%;
+    }
+    h4 {
+        text-align: center;
+        font-family: Lucida Sans Unicode;
+    }
+    h3 {
+        font-family: Lucida Sans Unicode;
+    }
+    p {
+        font-family: Lucida Sans Unicode;
+        padding-left: 2%;
+    }
+    .input {
+        padding-left: 2%;
+    }
+    .submit {
+        padding-left: 80%;
+    }
+    .container {
+        width: 30%;
+        margin: auto;
+        padding: 2%;
+    }
+</style>
+
+<script type="text/javascript">
+function validateGameConfig() {
+    var player1Move = document.getElementById('player-1-move').value;
+    var player2Move = document.getElementById('player-2-move').value;
+
+    if(player1Move == " " || player1Move == "") {
+        alert("Must enter a move signature for player 1.");
+        return false;
+    } else if(player2Move == " " || player2Move == "") {
+        alert("Must enter a move signature for player 2.");
+        return false;
+    } else if(player1Move == player2Move) {
+        alert("Player move signatures must be distinct.");
+        return false;
+    } else {
+        return true;
+    }
+}
+</script>
+
+<h1>Tic Tac Toe!</h1>
+<h4>Modify game settings</h4>
+
+<div class="container">
+    <form action="game" onsubmit="return validateGameConfig()" method="post">
+
+        <input type="hidden" name="board" value=" , , , , , , , , ">
+
+        <h3>Player Identity</h3>
+            <div class="player-identity">
+                <p>What will be the identity of player 1?</p>
+                <div class="input">
+                    <p><input type="radio" name="player-1-id" value="human" checked="true"> Human</p>
+                    <p><input type="radio" name="player-1-id" value="ai"> AI</p>
+                </div>
+
+                <p>What will be the identity of player 2?</p>
+                <div class="input">
+                    <p><input type="radio" name="player-2-id" value="human"> Human</p>
+                    <p><input type="radio" name="player-2-id" value="ai" checked="true"> AI</p>
+                </div>
+            </div>
+
+    <h3>Player Moves</h3>
+        <div class="player-move">
+            <p>What will be the move signature for player 1?</p>
+                <div class="input">
+                    <p><input type="text" name="player-1-mv" id="player-1-move" value="X" size="3" maxLength="1"></p>
+                </div>
+
+            <p>What will be the move signature for player 2?</p>
+                <div class="input">
+                    <p><input type="text" name="player-2-mv" id="player-2-move" value="O" size="3" maxLength="1"></p>
+                </div>
+        </div>
+    <div class="submit">
+        <button type="submit">Play Now!</button>
+    </div>
+</form>

@@ -1,5 +1,6 @@
 package com.TTTServer;
 
+import com.TTTServer.Config.TTTRouteConfig;
 import com.httpServer.Config.LoggerConfig;
 import com.httpServer.Config.RouteConfig;
 import com.httpServer.Config.ServerConfig;
@@ -14,6 +15,7 @@ class Main {
         ServerConfig.configureServer(args);
 
         RouteConfig.setupRoutes();
+        TTTRouteConfig.setupRoutes();
 
         new ServerRunner().run();
     }

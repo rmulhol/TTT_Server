@@ -1,5 +1,6 @@
 package com.TTTServer.Config;
 
+import com.TTTServer.Responders.TTTGameConfigResponder;
 import com.TTTServer.Responders.TTTHomePageResponder;
 import com.httpServer.RequestAdapter.Request;
 import com.httpServer.Router.RouteRegistrar;
@@ -27,6 +28,14 @@ public class TTTRouteConfigTest {
         tttHomePageRequest.setMethod("GET");
         tttHomePageRequest.setUri("/tic_tac_toe");
         assertEquals(TTTHomePageResponder.class, RouteRegistrar.getRoute(tttHomePageRequest).getClass());
+    }
+
+    @Test
+    public void addsTTTGameConfigRoute() {
+        Request tttGameConfigRequest = new Request();
+        tttGameConfigRequest.setMethod("GET");
+        tttGameConfigRequest.setUri("/tic_tac_toe/config");
+        assertEquals(TTTGameConfigResponder.class, RouteRegistrar.getRoute(tttGameConfigRequest).getClass());
     }
 
 }
