@@ -11,32 +11,32 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class TTTGameConfigResponder implements Handler {
+public class TTTNewStandardGameResponder implements Handler {
 
-    private Response tttGameConfigResponse;
+    private Response tttNewStandardGameResponse;
 
     @Override
     public Response respondToRequest(Request request) {
-        tttGameConfigResponse = new Response();
+        tttNewStandardGameResponse = new Response();
         setStatus();
         setHeader();
         setBody();
-        return tttGameConfigResponse;
+        return tttNewStandardGameResponse;
     }
 
     private void setStatus() {
-        tttGameConfigResponse.setStatus(ResponseStatus.ok());
+        tttNewStandardGameResponse.setStatus(ResponseStatus.ok());
     }
 
     private void setHeader() {
-        tttGameConfigResponse.setHeader(ResponseHeader.noHeader());
+        tttNewStandardGameResponse.setHeader(ResponseHeader.noHeader());
     }
 
     private void setBody() {
         try {
-            Path tttGameConfigPagePath = Paths.get(System.getProperty("user.dir") + "/src/com/TTTServer/Responders/Pages/TTTGameConfigPage.txt");
-            byte[] tttGameConfigPage = Files.readAllBytes(tttGameConfigPagePath);
-            tttGameConfigResponse.setBody(tttGameConfigPage);
+            Path tttNewStandardGamePagePath = Paths.get(System.getProperty("user.dir") + "/src/com/TTTServer/Responders/Pages/TTTNewStandardGamePage.txt");
+            byte[] tttNewStandardGamePage = Files.readAllBytes(tttNewStandardGamePagePath);
+            tttNewStandardGameResponse.setBody(tttNewStandardGamePage);
         } catch (IOException e) {
             e.printStackTrace();
         }
