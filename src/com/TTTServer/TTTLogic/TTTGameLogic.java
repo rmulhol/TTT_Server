@@ -52,9 +52,9 @@ public class TTTGameLogic {
         } else {
             currentBoard = makeAiMove(currentPlayer.get("move"), currentBoard);
             if (gameOver(currentBoard, player1Mv, player2Mv)) {
-                TTTBoardState outputParams = new TTTBoardState(player1Mv, player2Mv, player1Id, player2Id, currentBoard);
-                outputParams.setGameOver();
-                return outputParams;
+                TTTBoardState gameOverState = new TTTBoardState(player1Mv, player2Mv, player1Id, player2Id, currentBoard);
+                gameOverState.setGameOver();
+                return gameOverState;
             } else {
                 return makeCurrentPlayerMove(player1, player2, currentBoard);
             }
