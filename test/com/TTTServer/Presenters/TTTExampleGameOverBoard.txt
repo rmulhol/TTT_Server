@@ -72,14 +72,14 @@
     <h4>Click An Open Space To Make A Move</h4>
 </div>
 <div class="container">
-    <div class="game-over">
-        <div class="contents">
-            <h1>Game Over!</h1>
-            <h2>Play again?</h2>
-            <a href="game"><button type="submit">Standard Game</button></a>
-            <a href="config"><button type="submit">Custom Game</button></a>
-        </div>
-    </div>
+<div class="game-over">
+<div class="contents">
+<h1>Game Over!</h1>
+<h2>Play again?</h2>
+<a href="game"><button type="submit">Standard Game</button></a>
+<a href="config"><button type="submit">Custom Game</button></a>
+</div>
+</div>
 <table>
 <tbody>
 <tr>

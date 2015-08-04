@@ -13,21 +13,26 @@ public class TTTBoardPresenter {
     public static byte[] presentBoard(TTTBoardState boardState) {
         byte[] stylesheet = getStylesheet();
         byte[] header = getHeader();
-        byte[] boardTable = getBoardTable(boardState);
+        byte[] boardRepresentation = getBoardRepresentation(boardState);
         byte[] script = getScript();
 
-        int totalPageLength = stylesheet.length + header.length + boardTable.length + script.length;
+        int stylesheetLength = stylesheet.length;
+        int headerLength = header.length;
+        int boardRepresentationLength = boardRepresentation.length;
+        int scriptLength = script.length;
+
+        int totalPageLength = stylesheetLength + headerLength + boardRepresentationLength + scriptLength;
         byte[] wholePage = new byte[totalPageLength];
 
         for (int i = 0; i < totalPageLength; i++) {
-            if (i < stylesheet.length) {
+            if (i < stylesheetLength) {
                 wholePage[i] = stylesheet[i];
-            } else if (i < stylesheet.length + header.length) {
-                wholePage[i] = header[i - stylesheet.length];
-            } else if (i < stylesheet.length + header.length + boardTable.length) {
-                wholePage[i] = boardTable[i - stylesheet.length - header.length];
+            } else if (i < stylesheetLength + headerLength) {
+                wholePage[i] = header[i - stylesheetLength];
+            } else if (i < stylesheetLength + headerLength + boardRepresentationLength) {
+                wholePage[i] = boardRepresentation[i - stylesheetLength - headerLength];
             } else {
-                wholePage[i] = script[i - stylesheet.length - header.length - boardTable.length];
+                wholePage[i] = script[i - stylesheetLength - headerLength - boardRepresentationLength];
             }
         }
 
@@ -36,7 +41,8 @@ public class TTTBoardPresenter {
 
     private static byte[] getStylesheet() {
         try {
-            Path tttBoardStylesheetPath = Paths.get(System.getProperty("user.dir") + "/src/com/TTTServer/Presenters/Assets/TTTBoardStylesheet.txt");
+            Path tttBoardStylesheetPath = Paths.get(System.getProperty("user.dir") +
+                    "/src/com/TTTServer/Presenters/Assets/TTTBoardStylesheet.txt");
             return Files.readAllBytes(tttBoardStylesheetPath);
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,7 +52,8 @@ public class TTTBoardPresenter {
 
     private static byte[] getHeader() {
         try {
-            Path tttBoardHeaderPath = Paths.get(System.getProperty("user.dir") + "/src/com/TTTServer/Presenters/Assets/TTTBoardHeader.txt");
+            Path tttBoardHeaderPath = Paths.get(System.getProperty("user.dir") +
+                    "/src/com/TTTServer/Presenters/Assets/TTTBoardHeader.txt");
             return Files.readAllBytes(tttBoardHeaderPath);
         } catch (IOException e) {
             e.printStackTrace();
@@ -54,9 +61,28 @@ public class TTTBoardPresenter {
         }
     }
 
+    private static byte[] getBoardRepresentation(TTTBoardState boardState) {
+        String boardRepresentation = "<div class=\"container\">\n";
+        if (boardState.isGameOver()) {
+            boardRepresentation += "<div class=\"game-over\">\n" +
+                    "<div class=\"contents\">\n" +
+                    "<h1>Game Over!</h1>\n" +
+                    "<h2>Play again?</h2>\n" +
+                    "<a href=\"game\"><button type=\"submit\">Standard Game</button></a>\n" +
+                    "<a href=\"config\"><button type=\"submit\">Custom Game</button></a>\n" +
+                    "</div>\n" +
+                    "</div>\n";
+        }
+        boardRepresentation += boardTable(boardState.getBoard(), boardState.getPlayer1Mv(), boardState.getPlayer2Mv(),
+                boardState.getPlayer1Id(), boardState.getPlayer2Id());
+        boardRepresentation += "</div>\n";
+        return boardRepresentation.getBytes();
+    }
+
     private static byte[] getScript() {
         try {
-            Path tttBoardScriptPath = Paths.get(System.getProperty("user.dir") + "/src/com/TTTServer/Presenters/Assets/TTTBoardScript.txt");
+            Path tttBoardScriptPath = Paths.get(System.getProperty("user.dir") +
+                    "/src/com/TTTServer/Presenters/Assets/TTTBoardScript.txt");
             return Files.readAllBytes(tttBoardScriptPath);
         } catch (IOException e) {
             e.printStackTrace();
@@ -64,28 +90,13 @@ public class TTTBoardPresenter {
         }
     }
 
-    private static byte[] getBoardTable(TTTBoardState boardState) {
-        String boardTable = "<div class=\"container\">\n";
-        if (boardState.isGameOver()) {
-            boardTable += "    <div class=\"game-over\">\n" +
-                    "        <div class=\"contents\">\n" +
-                    "            <h1>Game Over!</h1>\n" +
-                    "            <h2>Play again?</h2>\n" +
-                    "            <a href=\"game\"><button type=\"submit\">Standard Game</button></a>\n" +
-                    "            <a href=\"config\"><button type=\"submit\">Custom Game</button></a>\n" +
-                    "        </div>\n" +
-                    "    </div>\n";
-        }
-        boardTable += boardToTable(boardState.getBoard(), boardState.getPlayer1Mv(), boardState.getPlayer2Mv(), boardState.getPlayer1Id(), boardState.getPlayer2Id());
-        boardTable += "</div>\n";
-        return boardTable.getBytes();
-    }
-
-    private static String boardToTable(ArrayList<String> board, String player1Move, String player2Move, String player1Id, String player2Id) {
+    private static String boardTable(ArrayList<String> board, String player1Move, String player2Move, String player1Id,
+                                     String player2Id) {
         int boardSize = board.size();
         String boardTable = "<table>\n<tbody>\n<tr>\n";
         for (int i = 0; i < boardSize; i++) {
-            boardTable += cellContentsAsTableData(boardCellContents(board.get(i), player1Move, player2Move, player1Id, player2Id, board, i + 1), i + 1);
+            boardTable += cellContentsAsTableData(boardCellContents(board.get(i), player1Move, player2Move, player1Id,
+                    player2Id, board, i + 1), i + 1);
             if (isRowSeparator(i, boardSize)) {
                 boardTable += "</tr>\n<tr>\n";
             }
@@ -94,16 +105,12 @@ public class TTTBoardPresenter {
         return boardTable;
     }
 
-    private static boolean isRowSeparator(int index, int boardSize) {
-        return index % 3 == 2 && index < boardSize - 1;
-    }
-
     private static String cellContentsAsTableData(String cellContents, int index) {
         String tableData = "<td class=\"square";
-        if (indexIsInCenterColumn(index)) {
+        if (isInCenterColumn(index)) {
             tableData += " cc";
         }
-        if (indexIsInCenterRow(index)) {
+        if (isInCenterRow(index)) {
             tableData += " cr";
         }
         if (!cellContents.contains("h1")) {
@@ -114,11 +121,15 @@ public class TTTBoardPresenter {
         return tableData;
     }
 
-    private static boolean indexIsInCenterColumn(int index) {
+    private static boolean isRowSeparator(int index, int boardSize) {
+        return index % 3 == 2 && index < boardSize - 1;
+    }
+
+    private static boolean isInCenterColumn(int index) {
         return index % 3 == 2;
     }
 
-    private static boolean indexIsInCenterRow(int index) {
+    private static boolean isInCenterRow(int index) {
         return index > 3 && index < 7;
     }
 
